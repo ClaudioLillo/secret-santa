@@ -21,13 +21,17 @@
     "url": "https://github.com/ClaudioLillo/secret-santa/issues"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.2.6",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@reduxjs/toolkit": "^1.9.7",
     "antd": "^5.11.5",
+    "axios": "^1.6.2",
+    "jsonwebtoken": "^9.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.3",
-    "react-router-dom": "^6.20.0"
+    "react-router-dom": "^6.20.0",
+    "utf-8": "^2.0.0"
   },
   "devDependencies": {
     "eslint": "^8.54.0",

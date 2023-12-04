@@ -1,14 +1,36 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+import {
+  RouterProvider,
+  createBrowserRouter,
+  createHashRouter,
+} from "react-router-dom";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 
-const router = createBrowserRouter([
+// components
+import App from "./App";
+import Register from "./components/register/Register";
+import Login from "./components/login/Login";
+import Dashboard from "./components/dashboard/Dashboard";
+
+const router = createHashRouter([
   {
     path: "/*",
     element: <App />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
   },
 ]);
 
