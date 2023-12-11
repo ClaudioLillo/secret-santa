@@ -71,6 +71,11 @@ export default function Dashboard() {
                   items: data.Item.items,
                   fullName: data2.Item.fullName,
                 });
+              } else if (!data.Item && data2.Item) {
+                setTarget({
+                  ...target,
+                  fullName: data2.Item.fullName,
+                });
               }
             })
             .catch((err) => {
