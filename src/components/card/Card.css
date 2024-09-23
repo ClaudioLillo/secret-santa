@@ -1,0 +1,39 @@
+.card {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 200px;
+  height: 300px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.card-content {
+  width: 150px;
+  height: 150px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 25px 25px 0 25px;
+}
+
+.card-text {
+  text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 200;
+  padding: 3px;
+}
+
+.card-title {
+  text-transform: uppercase;
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+
+.card-subtitle {
+  text-transform: lowercase;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.card-id {
+  font-size: 12px;
+  margin-bottom: 2px;
+}

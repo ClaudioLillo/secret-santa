@@ -1,0 +1,30 @@
+.navigator {
+  width: 100vw;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+.navigator-option {
+  width: 25%;
+  height: 40px;
+  margin: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 0;
+  font-weight: 200;
+}
+
+.navigator-option:hover {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 1);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.navigator-option-selected {
+  width: 25%;
+  height: 40px;
+  margin: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 0;
+  font-weight: 200;
+  background: rgba(0, 0, 0, 0.5);
+}
