@@ -12,7 +12,7 @@ const options = [
 export default function App() {
   return (
     <div className="app">
-      <Navigator options={options} />
+      <Navigator />
     </div>
   );
 }

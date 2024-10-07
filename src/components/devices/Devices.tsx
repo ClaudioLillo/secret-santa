@@ -38,16 +38,10 @@ const devices = [
   },
 ];
 
-const options = [
-  { name: "Dispositivos", path: "devices" },
-  { name: "Listas", path: "lists" },
-  { name: "Libros", path: "books" },
-];
-
 export default function Devices() {
   return (
     <div className="app">
-      <Navigator options={options} />
+      <Navigator />
       <div className="devices">
         {devices.map((device) => (
           <Card key={device.id} device={device} />

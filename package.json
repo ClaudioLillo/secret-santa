@@ -6,9 +6,9 @@
     "start": "react-scripts start",
     "start-local": "HOST=0.0.0.0 react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --coverage -c jest.config.ts",
     "eject": "react-scripts eject",
-    "deploy-dev": "npm run build && aws s3 sync build/ s3://secret-santa-2023 --delete --profile claudio"
+    "deploy-dev": "yarn build && aws s3 sync build/ s3://secret-santa-2023 --delete --profile claudio"
   },
   "repository": {
     "type": "git",
@@ -35,10 +35,14 @@
     "utf-8": "^2.0.0"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.25.7",
     "@types/jest": "^29.5.13",
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.8",
     "@types/react-dom": "^18.3.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
   },
   "eslintConfig": {

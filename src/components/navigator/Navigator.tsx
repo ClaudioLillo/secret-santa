@@ -7,11 +7,16 @@ type NavOption = {
   path: string;
   name: string;
 };
-type NavInput = {
-  options: NavOption[];
-};
 
-export default function Navigator({ options }: NavInput) {
+const options: NavOption[] = [
+  { name: "Dispositivos", path: "devices" },
+  { name: "Tareas", path: "tasks" },
+  { name: "Libros", path: "books" },
+  { name: "Recetas", path: "recipes" },
+  { name: "Configuración", path: "settings" },
+];
+
+export default function Navigator() {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
   console.log("path: ", path);

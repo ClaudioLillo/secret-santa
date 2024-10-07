@@ -1,0 +1,33 @@
+.book {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 10px;
+}
+
+.book-title {
+  text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 400;
+  padding: 3px;
+  margin-bottom: 0;
+}
+
+.book-authors-year {
+  text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 400;
+  font-size: 12px;
+  padding: 3px;
+  margin-top: 0;
+}
+
+.books-filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}

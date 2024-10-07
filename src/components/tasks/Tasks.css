@@ -1,0 +1,18 @@
+.task {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  margin: 2px;
+}
+
+.task-title {
+  text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 400;
+}
+
+.task-tags {
+  border: none;
+  display: flex;
+  justify-content: center;
+}

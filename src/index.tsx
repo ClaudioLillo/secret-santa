@@ -8,6 +8,8 @@ import { Provider } from "react-redux";
 // components
 import Login from "./components/login/Login";
 import Devices from "./components/devices/Devices";
+import Tasks from "./components/tasks/Tasks";
+import Books from "./components/books/Books";
 
 const router = createHashRouter([
   {
@@ -15,12 +17,12 @@ const router = createHashRouter([
     element: <Devices />,
   },
   {
-    path: "/lists",
-    element: <Devices />,
+    path: "/tasks",
+    element: <Tasks />,
   },
   {
     path: "/books",
-    element: <Devices />,
+    element: <Books />,
   },
   {
     path: "/login",
