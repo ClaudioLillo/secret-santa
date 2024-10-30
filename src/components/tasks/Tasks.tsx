@@ -3,6 +3,7 @@ import React from "react";
 import "./Tasks.css";
 import Navigator from "../navigator/Navigator";
 import Task from "./Task";
+import { Select } from "antd";
 
 enum Status {
   Active = "active",
@@ -36,15 +37,30 @@ const elements: TaskItem[] = [
     description: "calo pan 250g",
     status: Status.Disabled,
     quantity: 1,
+    categories: ["supermercado"],
   },
-  { title: "sacar la basura", description: "", status: Status.Active },
+  {
+    title: "sacar la basura",
+    description: "",
+    status: Status.Active,
+    categories: ["casa"],
+  },
+];
+
+const options = [
+  { value: "casa", label: "casa" },
+  { value: "supermercado", label: "supermercado" },
+  { value: "feria", label: "feria" },
 ];
 
 export default function List() {
   return (
     <div>
       <Navigator />
-      <div className="list">
+      <div className="tasks-menu">
+        <Select options={options} defaultValue="supermercado" />
+      </div>
+      <div className="tasks">
         {elements.map((task: TaskItem) => (
           <Task task={task} />
         ))}

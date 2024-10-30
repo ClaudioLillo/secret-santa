@@ -19,7 +19,6 @@ const options: NavOption[] = [
 export default function Navigator() {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
-  console.log("path: ", path);
   const navigate = useNavigate();
   const goTo = (path: string) => () => {
     navigate(`/${path}`);

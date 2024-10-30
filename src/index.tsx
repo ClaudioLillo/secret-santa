@@ -10,6 +10,7 @@ import Login from "./components/login/Login";
 import Devices from "./components/devices/Devices";
 import Tasks from "./components/tasks/Tasks";
 import Books from "./components/books/Books";
+import Recipes from "./components/recipes/Recipes";
 
 const router = createHashRouter([
   {
@@ -23,6 +24,10 @@ const router = createHashRouter([
   {
     path: "/books",
     element: <Books />,
+  },
+  {
+    path: "/recipes",
+    element: <Recipes />,
   },
   {
     path: "/login",
