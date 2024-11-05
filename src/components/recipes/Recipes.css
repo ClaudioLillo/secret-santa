@@ -3,6 +3,52 @@
 }
 
 .recipe-item {
-  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
   margin: 8px;
+}
+
+.recipe-item-text {
+  color: rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  font-family: "Courier New", Courier, monospace;
+  margin: 0;
+  padding: 10px;
+}
+
+.recipe-item:hover {
+  background: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.recipe-item:hover p {
+  color: black;
+}
+
+.step-item {
+  color: rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.recipe-modal-section {
+  color: rgba(0, 0, 0, 1);
+  text-transform: uppercase;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 600;
+  margin-top: 40px;
+}
+
+.steps {
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+.new-recipe-button {
+  color: rgba(0, 0, 0, 0.5);
+  font-family: "Courier New", Courier, monospace;
+}
+
+.recipe-img {
+  object-fit: contain;
+  height: 100px;
 }

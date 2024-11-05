@@ -7,31 +7,35 @@
 }
 
 .navigator-option {
-  width: 104px;
-  height: 48px;
+  padding: 10px;
   margin: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
-  font-weight: 200;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  font-weight: 400;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
 }
 
 .navigator-option:hover {
   cursor: pointer;
-  width: 104px;
-  height: 48px;
+  padding: 10px;
   margin: 5px;
   border: 1px solid rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
+  border-radius: 4px;
   font-weight: 200;
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
 }
 
 .navigator-option-selected {
-  width: 104px;
-  height: 48px;
+  padding: 10px;
   margin: 5px;
   border: 1px solid rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
+  border-radius: 4px;
   font-weight: 200;
   background: rgba(0, 0, 0, 0.5);
   color: rgba(255, 255, 255, 1);
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
 }

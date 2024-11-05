@@ -61,8 +61,8 @@ export default function List() {
         <Select options={options} defaultValue="supermercado" />
       </div>
       <div className="tasks">
-        {elements.map((task: TaskItem) => (
-          <Task task={task} />
+        {elements.map((task: TaskItem, index: number) => (
+          <Task task={task} key={index} />
         ))}
       </div>
     </div>
