@@ -11,11 +11,12 @@ import Devices from "./components/devices/Devices";
 import Tasks from "./components/tasks/Tasks";
 import Books from "./components/books/Books";
 import Recipes from "./components/recipes/Recipes";
+import Home from "./components/home/Home";
 
 const router = createHashRouter([
   {
     path: "/*",
-    element: <Devices />,
+    element: <Home />,
   },
   {
     path: "/tasks",
