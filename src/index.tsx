@@ -13,6 +13,7 @@ import Books from "./components/books/Books";
 import Recipes from "./components/recipes/Recipes";
 import Home from "./components/home/Home";
 import Supermarket from "./components/supermarket/Supermarket";
+import Plants from "./components/plants/Plants";
 
 const router = createHashRouter([
   {
@@ -39,6 +40,10 @@ const router = createHashRouter([
     path: "/login",
     element: <Login />,
   },
+  {
+    path: "/plants",
+    element: <Plants/>,
+  }
 ]);
 
 const rootElement = document.getElementById("root");

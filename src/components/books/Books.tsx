@@ -92,8 +92,8 @@ export default function Books() {
       </div>
       <div className="list">
         {filter &&
-          filterBooks(books, filter).map((book: BookItem) => (
-            <Book book={book} key={book.name} />
+          filterBooks(books, filter).map((book: BookItem, index) => (
+            <Book book={book} key={index} />
           ))}
       </div>
     </div>
