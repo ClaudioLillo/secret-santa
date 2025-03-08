@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import "./Books.css";
-import Navigator from "../navigator/Navigator";
+import Header from "../header/Header";
 import Book from "./Book";
 import { Space } from "antd";
 import Search, { SearchProps } from "antd/es/input/Search";
@@ -80,7 +80,7 @@ export default function Books() {
 
   return (
     <div>
-      <Navigator />
+      <Header />
       <div className="books-filters">
         <Space direction="vertical">
           <Search

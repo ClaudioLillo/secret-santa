@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./Tasks.css";
-import Navigator from "../navigator/Navigator";
+import Header from "../header/Header";
 import Task from "./Task";
 import { Select } from "antd";
 
@@ -56,7 +56,7 @@ const options = [
 export default function List() {
   return (
     <div>
-      <Navigator />
+      <Header />
       <div className="tasks-menu">
         <Select options={options} defaultValue="supermercado" />
       </div>

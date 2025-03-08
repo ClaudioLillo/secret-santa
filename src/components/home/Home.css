@@ -1,18 +1,25 @@
 .home{
-    padding: 16px;
     border: 1px solid rgba(0,0,0,0.1);
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .page-card{
-    padding: 16px;
+    padding: 8px;
     border: 1px solid rgba(0,0,0,0.1);
-    width: 40%;
+    min-width: 160px;
+    max-width: 150px;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 8px;
     font-family: Verdana, sans-serif;
+}
+
+.page-card:hover{
+    border: 1px solid rgba(0,0,0,0.4);
+    cursor: pointer;
+    color: green;
 }

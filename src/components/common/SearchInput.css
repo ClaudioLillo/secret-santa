@@ -1,0 +1,14 @@
+.search-input{
+    border: 1px solid rgba(0,0,0,0.1);
+    width: 200px;
+    padding: 4px;
+}
+
+.search-input input{
+    border: none;
+}
+
+.search-input input:focus{
+    border: none;
+    outline: none;
+}

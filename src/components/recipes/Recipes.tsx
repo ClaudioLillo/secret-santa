@@ -3,35 +3,10 @@ import React, { useEffect, useState } from "react";
 import "./Recipes.css";
 
 import RecipeItem from "./Recipe";
-import Navigator from "../navigator/Navigator";
+import Header from "../header/Header";
 import { Button, Divider, Form, Input, Modal } from "antd";
 import { createRecipe, getRecipes } from "../../data/recipes";
 import { Recipe, Ingredient } from "../../types/recipes";
-
-// const recipeItem = {
-//   ingredients: [
-//     { name: "Mantequilla", quantity: 250, unit: "gramos" },
-//     { name: "Azúcar", quantity: 250, unit: "gramos" },
-//     { name: "Harina", quantity: 100, unit: "gramos" },
-//   ],
-//   title: "Galletas de Mantequilla",
-//   steps: [
-//     "mezclar mantequilla con azúcar",
-//     "agregar llema de huevo y mezclar",
-//     "agregar harina poco a poco",
-//   ],
-// };
-
-// const item2 = {
-//   ingredients: [
-//     { name: "Champiñones", quantity: 250, unit: "gramos" },
-//     { name: "Arroz", quantity: 1.5, unit: "tazas" },
-//     { name: "Pollo", quantity: 1, unit: "pieza" },
-//   ],
-//   title: "Rissoto de champiñones",
-// };
-
-// const recipes = [recipeItem, item2, recipeItem];
 
 export default function Recipes() {
   const [open, setOpen] = useState(false);
@@ -117,13 +92,15 @@ export default function Recipes() {
   useEffect(() => {
     getRecipes().then((recipes) => {
       setRecipes(recipes);
+    }).catch(err=>{
+      console.log(err);
     });
   }, []);
 
   return (
     <div>
-      <Navigator />
-      <Divider />
+      <Header/>
+      <Divider/>
       <Button onClick={handleOpen} className="new-recipe-button">
         Nueva
       </Button>

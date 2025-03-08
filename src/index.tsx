@@ -7,11 +7,12 @@ import { Provider } from "react-redux";
 
 // components
 import Login from "./components/login/Login";
-import Devices from "./components/devices/Devices";
+// import Devices from "./components/devices/Devices";
 import Tasks from "./components/tasks/Tasks";
 import Books from "./components/books/Books";
 import Recipes from "./components/recipes/Recipes";
 import Home from "./components/home/Home";
+import Supermarket from "./components/supermarket/Supermarket";
 
 const router = createHashRouter([
   {
@@ -29,6 +30,10 @@ const router = createHashRouter([
   {
     path: "/recipes",
     element: <Recipes />,
+  },
+  {
+    path: "/supermarket",
+    element: <Supermarket />,
   },
   {
     path: "/login",

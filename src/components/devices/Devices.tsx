@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "../card/Card";
-import Navigator from "../navigator/Navigator";
+import Header from "../header/Header";
 
 import "./Devices.css";
 import "../../App.css";
@@ -41,7 +41,7 @@ const devices = [
 export default function Devices() {
   return (
     <div className="app">
-      <Navigator />
+      <Header />
       <div className="devices">
         {devices.map((device) => (
           <Card key={device.id} device={device} />

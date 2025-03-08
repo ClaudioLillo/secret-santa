@@ -10,7 +10,7 @@
 .recipe-item-text {
   color: rgba(0, 0, 0, 0.5);
   text-transform: uppercase;
-  font-family: "Courier New", Courier, monospace;
+  font-family: Verdana, sans-serif;
   margin: 0;
   padding: 10px;
 }
@@ -27,13 +27,13 @@
 .step-item {
   color: rgba(0, 0, 0, 0.5);
   text-transform: uppercase;
-  font-family: "Courier New", Courier, monospace;
+  font-family: Verdana, sans-serif;
 }
 
 .recipe-modal-section {
   color: rgba(0, 0, 0, 1);
   text-transform: uppercase;
-  font-family: "Courier New", Courier, monospace;
+  font-family: Verdana, sans-serif;
   font-weight: 600;
   margin-top: 40px;
 }
@@ -45,7 +45,7 @@
 
 .new-recipe-button {
   color: rgba(0, 0, 0, 0.5);
-  font-family: "Courier New", Courier, monospace;
+  font-family: Verdana, sans-serif;
 }
 
 .recipe-img {

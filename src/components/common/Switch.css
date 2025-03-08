@@ -1,0 +1,27 @@
+.switch{
+    border-radius: 5px;
+    width: 100px;
+    border: 1px solid rgba(0,0,0,0.3);
+    display: flex;
+    font-family: Verdana, sans-serif;
+    font-size: 12px;
+    overflow: hidden;
+}
+
+.switch-option-active{
+    background-color: rgba(30,20,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    color: black;
+}
+
+.switch-option-default{
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    color: grey;
+}
