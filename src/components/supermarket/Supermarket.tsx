@@ -5,14 +5,8 @@ import SearchInput from '../common/SearchInput';
 import Switch from '../common/Switch';
 
 import './Supermarket.css';
-
-export type SuperMarketItem = {
-    name: string;
-    quantity: number;
-    active: boolean;
-    category?: string;
-    brand?: string;
-}
+import { SupermarketItem } from '../../types/supermarket';
+import SupermarketTable from './SupermarketTable';
 
 const columns = [
     {
@@ -40,13 +34,13 @@ export default function Supermarket(){
         setFilter(e.target.value)
     }
 
-    const filterItems = (items: SuperMarketItem[]) => {
+    const filterItems = (items: SupermarketItem[]) => {
         return filter === '' ?
         items:
         items.filter(item => item.name.search(filter) >=0)
     }
 
-    const removeDisabled = (items: SuperMarketItem[]) => {
+    const removeDisabled = (items: SupermarketItem[]) => {
         return !onlyActive ?
         items:
         items.filter(item => item.active)
@@ -56,7 +50,7 @@ export default function Supermarket(){
         setOnlyActive(!onlyActive)
     }
 
-    const items: SuperMarketItem[] = [
+    const items: SupermarketItem[] = [
         {name: 'mantequilla', quantity: 1, active: true, brand: 'calo'},
         {name: 'harina', quantity: 2, active: true, brand: 'selecta'},
         {name: 'crema de leche', quantity: 4, active: true},
@@ -69,7 +63,7 @@ export default function Supermarket(){
         setAddModalOpen(!addModalOpen);
     }
     return (
-        <div>
+        <div className="sumpermarket">
             <Header/>
             <div className="supermarket-input-container">
             <SearchInput onChange={onSearchInputChange}/>
@@ -79,10 +73,14 @@ export default function Supermarket(){
             <Button onClick={handleAddModalOpen}>Agregar Nuevo</Button>
             </div>
             <div className="supermaket">
-                <Table dataSource={dataSource} columns={columns}/>
+                <SupermarketTable dataSource={dataSource} columns={columns}/>
             </div>
             <Modal open={addModalOpen} onCancel={handleAddModalOpen} onOk={handleAddModalOpen} onClose={handleAddModalOpen}>
-                <h1>aqui se agregará uno nuevo</h1>
+                <h3>Agregar nuevo producto</h3>
+                <form>
+                    <label>Nombre</label>
+                    <input type="text" id="add-product"/>
+                </form>
             </Modal>
         </div>
         

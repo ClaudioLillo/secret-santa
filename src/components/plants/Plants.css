@@ -7,6 +7,11 @@
     margin-top: 16px;
 }
 
+.plant:hover{
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,1);
+}
+
 .latin {
     font-family: Verdana, sans-serif;
     font-style: italic;

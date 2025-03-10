@@ -4,3 +4,7 @@
     grid-column-gap: 10px;
     padding: 16px;
 }
+
+.supermarket label{
+    margin-right: 16px;
+}
