@@ -41,6 +41,11 @@ const plants = [
         scientificName: 'Hydrangea macrophylla',
         description: 'Especie originaria de Japón. Se trata de un arbusto caducifolio que crece hasta una alterua de 1 a 3 m. Las hojas son opuestas, ovales, dentadas y acuminadas, de 7 a 20 cm de longitud, con bordes rudamente dentados. Las inflorescencias se agrupan en corimbos terminales, grandes cabezas globulares de color blanco, azul rojo o rosa. El color de las flores depende del al cantidad de sulfato de aluminio que contenga el suelo. La floración se produce desde mediados de la primavera hasta finales del verano.',
     },
+    {
+        commonName: 'Coorazón de Hombre',
+        scientificName: 'Peperomia polybotrya',
+        description: 'Especie originaria de zonas tropicales de Sud América, requiere poco riego y mucha luz indirecta. Es capaz de almacenar agua al interior de sus hojas. Se mantiene mejor en temperaturas cálidas.',
+    },
     
 ]
 

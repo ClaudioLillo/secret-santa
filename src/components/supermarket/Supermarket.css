@@ -8,3 +8,43 @@
 .supermarket label{
     margin-right: 16px;
 }
+
+.table-header{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.table-header-cell{
+    width: 200px;
+    border: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    padding: 5px;
+}
+
+.table-body{
+    display: flex;
+    flex-direction: column;
+}
+
+.table{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.table-row{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.table-body-cell{
+    width: 200px;
+    padding: 5px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.enabled{
+    background-color: rgba(0,255,0,0.3);
+}

@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import Header from '../header/Header';
 import { Button, Modal, Table } from 'antd';
 import SearchInput from '../common/SearchInput';
@@ -7,6 +7,7 @@ import Switch from '../common/Switch';
 import './Supermarket.css';
 import { SupermarketItem } from '../../types/supermarket';
 import SupermarketTable from './SupermarketTable';
+import { createSupermarketItem, getSupermarketItems } from '../../data/supermarket';
 
 const columns = [
     {
@@ -30,6 +31,15 @@ export default function Supermarket(){
     const [filter, setFilter] = useState('');
     const [onlyActive, setOnlyActive] = useState(true);
     const [addModalOpen, setAddModalOpen] = useState(false);
+    const [items, setItems] = useState<SupermarketItem[]>([]);
+    const [newItem, setNewItem] = useState<SupermarketItem>({
+        name: '',
+        quantity: 0,
+        active: true,
+        category: '',
+        imageUrl: '',
+        brand: '',
+    })
     const onSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFilter(e.target.value)
     }
@@ -50,18 +60,36 @@ export default function Supermarket(){
         setOnlyActive(!onlyActive)
     }
 
-    const items: SupermarketItem[] = [
-        {name: 'mantequilla', quantity: 1, active: true, brand: 'calo'},
-        {name: 'harina', quantity: 2, active: true, brand: 'selecta'},
-        {name: 'crema de leche', quantity: 4, active: true},
-        {name: 'atún en tarro', quantity: 4, active: true},
-        {name: 'bolsas de basura', quantity: 2, active: false}
-    ] 
-    
-    const dataSource = removeDisabled(filterItems(items.map((item, index)=>({...item, key: index}))))
     const handleAddModalOpen = () => {
         setAddModalOpen(!addModalOpen);
     }
+
+    const addProduct = async() => {
+        await createSupermarketItem(newItem)
+        setAddModalOpen(false);
+        setNewItem({
+            name: '',
+        quantity: 0,
+        active: true,
+        })
+    }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewItem({...newItem, [e.target.name]: e.target.value});
+    }
+
+    useEffect(()=>{
+        getSupermarketItems()
+        .then(data=>{
+            console.log('data: ', data);
+            setItems(data)
+        })
+    }, [])
+
+    console.log('items: ', items);
+
+    const dataSource = removeDisabled(filterItems(items.map((item, index)=>({...item, key: index}))))
+
     return (
         <div className="sumpermarket">
             <Header/>
@@ -73,13 +101,19 @@ export default function Supermarket(){
             <Button onClick={handleAddModalOpen}>Agregar Nuevo</Button>
             </div>
             <div className="supermaket">
-                <SupermarketTable dataSource={dataSource} columns={columns}/>
+                {items.length > 0 && <SupermarketTable dataSource={dataSource} columns={columns}/>}
             </div>
-            <Modal open={addModalOpen} onCancel={handleAddModalOpen} onOk={handleAddModalOpen} onClose={handleAddModalOpen}>
+            <Modal open={addModalOpen} onCancel={handleAddModalOpen} onOk={addProduct} onClose={handleAddModalOpen}>
                 <h3>Agregar nuevo producto</h3>
                 <form>
                     <label>Nombre</label>
-                    <input type="text" id="add-product"/>
+                    <input type="text" name="name" onChange={handleChange}/>
+                    <br/>
+                    <label>Categoría</label>
+                    <input type="text" name="category" onChange={handleChange}/>
+                    <br/>
+                    <label>Cantidad</label>
+                    <input type="text" name="quantity" onChange={handleChange}/>
                 </form>
             </Modal>
         </div>
