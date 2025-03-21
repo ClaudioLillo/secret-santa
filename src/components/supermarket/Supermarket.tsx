@@ -39,7 +39,9 @@ export default function Supermarket(){
         category: '',
         imageUrl: '',
         brand: '',
-    })
+    });
+    const [selectedProduct, setSelectedProduct] = useState<SupermarketItem|undefined>(undefined);
+    const [productDetailsOpen, setProductDetailsOpen] = useState(false);
     const onSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFilter(e.target.value)
     }
@@ -65,16 +67,33 @@ export default function Supermarket(){
     }
 
     const addProduct = async() => {
-        await createSupermarketItem(newItem)
+        try{
+            const response = await createSupermarketItem(newItem)
         setAddModalOpen(false);
         setNewItem({
             name: '',
         quantity: 0,
         active: true,
-        })
+        category: '',
+        imageUrl: '',
+        brand: '',
+        });
+        if(response.status === 200){
+            alert('el producto ha sido guardado exitosamente')
+        }
+        }
+        catch(e){
+            console.log(e);
+            alert('no se pudo guardar')
+        }
+        
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.name === 'quantity'){
+            setNewItem({...newItem, quantity: parseInt(e.target.value)});
+            return;
+        }
         setNewItem({...newItem, [e.target.name]: e.target.value});
     }
 
@@ -86,9 +105,13 @@ export default function Supermarket(){
         })
     }, [])
 
-    console.log('items: ', items);
-
     const dataSource = removeDisabled(filterItems(items.map((item, index)=>({...item, key: index}))))
+
+    const onRowClick = (rowId: string) => () =>{
+        console.log(rowId);
+        setSelectedProduct(items.find((item)=> item.name === rowId))
+        setProductDetailsOpen(true);
+    }
 
     return (
         <div className="sumpermarket">
@@ -101,20 +124,39 @@ export default function Supermarket(){
             <Button onClick={handleAddModalOpen}>Agregar Nuevo</Button>
             </div>
             <div className="supermaket">
-                {items.length > 0 && <SupermarketTable dataSource={dataSource} columns={columns}/>}
+                {items.length > 0 && <SupermarketTable dataSource={dataSource} columns={columns} onRowClick={onRowClick}/>}
             </div>
             <Modal open={addModalOpen} onCancel={handleAddModalOpen} onOk={addProduct} onClose={handleAddModalOpen}>
                 <h3>Agregar nuevo producto</h3>
-                <form>
-                    <label>Nombre</label>
-                    <input type="text" name="name" onChange={handleChange}/>
-                    <br/>
-                    <label>Categoría</label>
-                    <input type="text" name="category" onChange={handleChange}/>
-                    <br/>
-                    <label>Cantidad</label>
-                    <input type="text" name="quantity" onChange={handleChange}/>
+                <form className="modal-form">
+                    <div className="form-row">
+                        <label>Nombre</label>
+                        <input type="text" name="name" onChange={handleChange}/>
+                    </div>
+                    <div className="form-row">
+                        <label>Categoría</label>
+                        <input type="text" name="category" onChange={handleChange}/>
+                    </div>
+                    <div className="form-row">
+                        <label>Cantidad</label>
+                        <input type="text" name="quantity" onChange={handleChange}/>
+                    </div>
+                    <div className="form-row">
+                        <label>Marca</label>
+                        <input type="text" name="brand" onChange={handleChange}/>
+                    </div>  
                 </form>
+            </Modal>
+            <Modal 
+                open={productDetailsOpen} 
+                onCancel={()=>{setProductDetailsOpen(false)}} 
+                onOk={()=>{setProductDetailsOpen(false)}} 
+                onClose={()=>{setProductDetailsOpen(false)}}
+            >
+                <h3>Detalles</h3>
+                {selectedProduct &&
+                    <span>{selectedProduct.name}</span> 
+                }
             </Modal>
         </div>
         

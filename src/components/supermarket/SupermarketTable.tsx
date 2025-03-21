@@ -9,9 +9,10 @@ type Column = {
 type Props = {
     dataSource: SupermarketItem[];
     columns: Column[];
+    onRowClick:  (rowId: string) => () => void;
 }
 
-export default function SupermarketTable({dataSource, columns}: Props){
+export default function SupermarketTable({dataSource, columns, onRowClick}: Props){
     return (
         <div className="table">
             <div className="table-header">
@@ -21,7 +22,7 @@ export default function SupermarketTable({dataSource, columns}: Props){
             </div>
             <div className="table-body">
                 {dataSource.map((row, index)=>(
-                    <div className="table-row">
+                    <div className="table-row" onClick={onRowClick(row.name)}>
                     {columns.map(column=>(
                         <div className={`table-body-cell${row.active ? ' enabled':''}`} key={`${column.key}-${index}`}>{row[column.dataIndex as keyof SupermarketItem]}</div>
                     ))}
