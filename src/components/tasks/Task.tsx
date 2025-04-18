@@ -18,8 +18,8 @@ export default function Task({ task }: { task: TaskItem }) {
       <p className="task-title">{primaryText}</p>
       {task.categories && (
         <div className="task-tags">
-          {task.categories.map((cat) => (
-            <Tag color={categoryColor[cat]}>{cat}</Tag>
+          {task.categories.map((cat, index) => (
+            <Tag color={categoryColor[cat]} key={index}>{cat}</Tag>
           ))}
         </div>
       )}

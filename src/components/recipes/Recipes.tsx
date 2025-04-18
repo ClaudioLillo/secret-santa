@@ -90,17 +90,19 @@ export default function Recipes() {
   };
 
   useEffect(() => {
-    getRecipes().then((recipes) => {
-      setRecipes(recipes);
-    }).catch(err=>{
-      console.log(err);
-    });
+    getRecipes()
+      .then((recipes) => {
+        setRecipes(recipes);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (
     <div>
-      <Header/>
-      <Divider/>
+      <Header />
+      <Divider />
       <Button onClick={handleOpen} className="new-recipe-button">
         Nueva
       </Button>
@@ -127,8 +129,8 @@ export default function Recipes() {
           <Button onClick={addIngredient}>Agregar Ingrediente</Button>
           {ing && (
             <ul>
-              {ing.map((item) => (
-                <li>{item.name}</li>
+              {ing.map((item, index) => (
+                <li key={index}>{item.name}</li>
               ))}
             </ul>
           )}
@@ -139,8 +141,8 @@ export default function Recipes() {
           <Button onClick={addStep}>Agregar Instrucción</Button>
           {steps && (
             <ul>
-              {steps.map((step) => (
-                <li>{step}</li>
+              {steps.map((step, index) => (
+                <li key={index}>{step}</li>
               ))}
             </ul>
           )}

@@ -4,6 +4,7 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createHashRouter } from "react-router-dom";
 import store from "./redux/store";
 import { Provider } from "react-redux";
+import {jwtDecode} from 'jwt-decode';
 
 // components
 import Login from "./components/login/Login";
@@ -15,10 +16,26 @@ import Home from "./components/home/Home";
 import Supermarket from "./components/supermarket/Supermarket";
 import Plants from "./components/plants/Plants";
 
+let user: string | undefined = undefined;
+
+const token = localStorage.getItem('token');
+
+if (token === null || token === ""){
+  user = "";
+} else {
+  const decoded = jwtDecode<{exp: number, user: string}>(token);
+  const now = new Date().getTime();
+  if ( decoded?.exp * 1000 > now){
+    user = decoded?.user;
+  } else {
+    user = ""
+  }
+}
+
 const router = createHashRouter([
   {
     path: "/*",
-    element: <Home />,
+    element: <Home user={user}/>,
   },
   {
     path: "/tasks",
@@ -51,9 +68,9 @@ if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <React.StrictMode>
-      <Provider store={store}>
+      {user !== undefined && <Provider store={store}>
         <RouterProvider router={router} />
-      </Provider>
+      </Provider>}
     </React.StrictMode>
   );
 }

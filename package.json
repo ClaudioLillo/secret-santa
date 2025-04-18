@@ -8,7 +8,8 @@
     "build": "react-scripts build",
     "test": "jest --coverage -c jest.config.ts",
     "eject": "react-scripts eject",
-    "deploy-dev": "yarn build && aws s3 sync build/ s3://secret-santa-2023 --delete --profile claudio"
+    "deploy-dev": "yarn build && aws s3 sync build/ s3://secret-santa-2023 --delete --profile claudio",
+    "lint": "eslint"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,7 @@
     "@reduxjs/toolkit": "^1.9.7",
     "antd": "^5.11.5",
     "axios": "^1.6.2",
-    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
@@ -37,14 +38,24 @@
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.25.7",
+    "@eslint/js": "^9.24.0",
     "@types/jest": "^29.5.13",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.8",
     "@types/react-dom": "^18.3.0",
+    "eslint": "^9.24.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.0.0",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.29.1"
+  },
+  "browser": {
+    "crypto": false
   },
   "eslintConfig": {
     "extends": [

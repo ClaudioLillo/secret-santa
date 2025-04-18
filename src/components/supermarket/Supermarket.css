@@ -57,6 +57,13 @@
 }
 
 .form-row {
-    padding: 3px;
     display: flex;
+    margin-bottom: 8px;
+    align-items: end;
+}
+
+.form-row input{
+    height: 24px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 5px;
 }

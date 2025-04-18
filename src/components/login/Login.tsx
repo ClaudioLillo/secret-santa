@@ -1,49 +1,23 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { Button, Divider, Form, Input, Select } from "antd";
-
-type State = {
-  sk?: string;
-  password?: string;
-  items?: any[];
-};
+import { auth, User } from "../../data/login";
+import { getUsers } from "../../data/users";
+import { Button, Form, Input, Select } from "antd";
 
 export default function Login() {
-  const [state, setState] = useState<State>({});
+  const [user, setUser] = useState<User>({});
+  const [users, setUsers] = useState<User[]>([]);
   const navigate = useNavigate();
-  const goBack = () => {
-    navigate(-1);
-  };
-  const getUsers = async () => {
-    const config = {
-      url: "https://1mkmi7steb.execute-api.us-east-1.amazonaws.com/apiv1/users",
-      method: "GET",
-    };
-    const response = await axios(config);
-    return response.data.data;
-  };
-  const auth = async ({ sk, password }: State) => {
-    const config = {
-      url: "https://1mkmi7steb.execute-api.us-east-1.amazonaws.com/apiv1/login",
-      method: "POST",
-      data: {
-        sk,
-        password,
-      },
-      headers: { "Content-Type": "application/json" },
-    };
-    const response = await axios(config);
-    return response.data;
-  };
-  const onSubmit = async (e: any) => {
+
+  const onSubmit = async (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
-    await auth(state)
-      .then(({ token }) => {
+    await auth(user)
+      .then((token) => {
         localStorage.setItem("token", token);
         alert("Bienvenido");
-        navigate("/dashboard");
+        navigate("/");
+        window.location.reload();
       })
       .catch((err) => {
         console.log("Error de autenticación", err);
@@ -51,49 +25,38 @@ export default function Login() {
       });
   };
   const handleChange = (e: ChangeEvent<{ name: string; value: string }>) => {
-    console.log("target:", e.target);
-    setState({ ...state, [e.target.name]: e.target.value });
+    setUser({ ...user, [e.target.name]: e.target.value });
   };
-  const handleSelectChange = (e: any) => {
-    console.log(e);
-    setState({ ...state, sk: e });
+
+  const handleSelectChange = (e: string) => {
+    setUser({ ...user, sk: e });
   };
+
   useEffect(() => {
     getUsers()
-      .then(({ Items: items }) => {
-        setState({ ...state, items });
+      .then((users) => {
+        setUsers(users);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  const isReady = state.items && state.items.length;
+  const isReady = users && users.length;
   return (
     <div className="login">
-      <Button onClick={goBack} type="default">
-        VOLVER
-      </Button>
-      <Divider />
       <Form>
-        <Form.Item
-          label={
-            isReady
-              ? "Seleccione su usuario de la lista"
-              : "Aún no se han registrado usuarios, regístrese para iniciar"
-          }
-        >
-          {isReady ? (
+        {isReady && (
+          <Form.Item label="Seleccione su usuario de la lista">
             <Select
-              // name="sk"
               onChange={handleSelectChange}
-              options={state.items?.map((item) => ({
-                value: item.sk,
-                label: item.fullName,
+              options={users.map((user) => ({
+                value: user.sk,
+                label: user.fullName,
               }))}
-            ></Select>
-          ) : null}
-        </Form.Item>
+            />
+          </Form.Item>
+        )}
         <Form.Item label="Contraseña">
           <Input onChange={handleChange} name="password" type="password" />
         </Form.Item>

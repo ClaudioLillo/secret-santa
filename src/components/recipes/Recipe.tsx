@@ -1,19 +1,12 @@
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import {
-  Button,
-  Divider,
-  message,
-  Modal,
-  Table,
-  Upload,
-  UploadProps,
-} from "antd";
+import { Button, Divider, message, Modal, Table, Upload } from "antd";
 import { UploadChangeParam, UploadFile } from "antd/es/upload/interface";
 import React, { useState } from "react";
 import { deleteRecipe, editRecipe } from "../../data/recipes";
 import { uploadFile } from "../../data/upload";
 
 import "./Recipes.css";
+import { convertToBase64 } from "../../utils/compression/convertToBase64";
 
 type RecipeItem = {
   title: string;
@@ -76,9 +69,11 @@ export default function Recipe({
     </button>
   );
 
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   const handleChange = (info: UploadChangeParam<UploadFile<any>>) => {
     if (info.file.status !== "uploading") {
       console.log(info.file, info.fileList);
+      setLoading(true);
     }
     if (info.file.status === "done") {
       message.success(`${info.file.name} file uploaded successfully`);
@@ -87,23 +82,9 @@ export default function Recipe({
     }
   };
 
-  const convertToBase64 = (file: any) => {
-    return new Promise((resolve, reject) => {
-      const fr = new FileReader();
-      fr.readAsDataURL(file);
-      fr.onload = () => {
-        resolve(fr.result);
-      };
-
-      fr.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
-
   const customRequest = async (options: any) => {
     const base64 = await convertToBase64(options.file);
-    const res = await uploadFile(base64);
+    const res = await uploadFile(base64 as object);
     const id = res.data.id;
     const newRecipe = {
       ingredients,
@@ -113,7 +94,7 @@ export default function Recipe({
       pk,
       sk,
     };
-    const result = await editRecipe(newRecipe);
+    await editRecipe(newRecipe);
     options.onSuccess(res.data, options.file);
   };
 
@@ -139,6 +120,7 @@ export default function Recipe({
           <img
             src={`https://dvc7eudx12z52.cloudfront.net/${image}`}
             className="recipe-img"
+            alt="recipe-image"
           />
         ) : (
           <Upload

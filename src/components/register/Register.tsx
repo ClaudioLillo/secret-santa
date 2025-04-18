@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import React, { useState } from "react";
 import "./Register.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -33,7 +33,7 @@ export default function Register() {
     const response = await axios(config);
     return response;
   };
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     await createUser(state as User)
       .then((res) => {
@@ -45,7 +45,9 @@ export default function Register() {
         console.log("No fue posible guardar", err);
       });
   };
-  const handleChange = (e: any) => {
+  const handleChange = (
+    e: React.ChangeEvent<{ name: string; value: string }>
+  ) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
   return (

@@ -1,5 +1,4 @@
-import React, {FC, useState} from 'react';
-import Plant from '../../icons/Plants'
+import React, { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './Home.css';
@@ -17,7 +16,7 @@ export default function PageCard({name, icon, iconSelected, path}: Props){
 
     const goTo = (path: string) => () => {
         navigate(`/${path}`);
-      };
+    };
 
     const handleSelected = (value: boolean) => () =>{
         setSelected(value);

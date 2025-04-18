@@ -1,5 +1,3 @@
-import { stringify } from "querystring";
-
 // returns a score on based on the accuracy between several string fields on an object and an given input
 export default function multimatcher(
   options: Record<string, unknown>[],

@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const RECIPES_URL =
+const IMAGES_URL =
   "https://1mkmi7steb.execute-api.us-east-1.amazonaws.com/upload";
 
-export const uploadFile = async (payload: any) => {
+export const uploadFile = async (payload: object) => {
   const token = localStorage.getItem("token");
   const config = {
-    url: RECIPES_URL,
+    url: IMAGES_URL,
     method: "POST",
     data: {
       payload,

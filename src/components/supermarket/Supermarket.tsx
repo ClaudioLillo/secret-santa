@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import Header from '../header/Header';
-import { Button, Modal, Table } from 'antd';
+import { Button, Modal } from 'antd';
 import SearchInput from '../common/SearchInput';
 import Switch from '../common/Switch';
 
@@ -8,6 +8,7 @@ import './Supermarket.css';
 import { SupermarketItem } from '../../types/supermarket';
 import SupermarketTable from './SupermarketTable';
 import { createSupermarketItem, getSupermarketItems } from '../../data/supermarket';
+import AddModal from './AddModal';
 
 const columns = [
     {
@@ -19,11 +20,6 @@ const columns = [
         title: "Cantidad",
         dataIndex: "quantity",
         key: "quantity",
-    },
-    {
-        title: "Marca",
-        dataIndex: "brand",
-        key: "brand",
     },
 ]
 
@@ -42,14 +38,15 @@ export default function Supermarket(){
     });
     const [selectedProduct, setSelectedProduct] = useState<SupermarketItem|undefined>(undefined);
     const [productDetailsOpen, setProductDetailsOpen] = useState(false);
+    const [editMode, setEditMode] = useState(false);
     const onSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setFilter(e.target.value)
+        setFilter(e.target.value.toLowerCase());
     }
 
     const filterItems = (items: SupermarketItem[]) => {
         return filter === '' ?
         items:
-        items.filter(item => item.name.search(filter) >=0)
+        items.filter(item => (item.name).toLowerCase().search(filter) >=0)
     }
 
     const removeDisabled = (items: SupermarketItem[]) => {
@@ -79,12 +76,14 @@ export default function Supermarket(){
         brand: '',
         });
         if(response.status === 200){
-            alert('el producto ha sido guardado exitosamente')
+            alert('el producto ha sido guardado exitosamente');
+            setSelectedProduct(undefined);
+            window.location.reload();
         }
         }
         catch(e){
             console.log(e);
-            alert('no se pudo guardar')
+            alert('Error al guardar')
         }
         
     }
@@ -100,7 +99,6 @@ export default function Supermarket(){
     useEffect(()=>{
         getSupermarketItems()
         .then(data=>{
-            console.log('data: ', data);
             setItems(data)
         })
     }, [])
@@ -108,9 +106,14 @@ export default function Supermarket(){
     const dataSource = removeDisabled(filterItems(items.map((item, index)=>({...item, key: index}))))
 
     const onRowClick = (rowId: string) => () =>{
-        console.log(rowId);
         setSelectedProduct(items.find((item)=> item.name === rowId))
         setProductDetailsOpen(true);
+    }
+
+    const enableEditMode = () => {
+        setEditMode(true);
+        setAddModalOpen(true);
+        setProductDetailsOpen(false);
     }
 
     return (
@@ -124,39 +127,32 @@ export default function Supermarket(){
             <Button onClick={handleAddModalOpen}>Agregar Nuevo</Button>
             </div>
             <div className="supermaket">
-                {items.length > 0 && <SupermarketTable dataSource={dataSource} columns={columns} onRowClick={onRowClick}/>}
+                {items.length > 0 && <SupermarketTable dataSource={dataSource} columns={columns} onRowClick={onRowClick} displayStatus={onlyActive}/>}
             </div>
-            <Modal open={addModalOpen} onCancel={handleAddModalOpen} onOk={addProduct} onClose={handleAddModalOpen}>
-                <h3>Agregar nuevo producto</h3>
-                <form className="modal-form">
-                    <div className="form-row">
-                        <label>Nombre</label>
-                        <input type="text" name="name" onChange={handleChange}/>
-                    </div>
-                    <div className="form-row">
-                        <label>Categoría</label>
-                        <input type="text" name="category" onChange={handleChange}/>
-                    </div>
-                    <div className="form-row">
-                        <label>Cantidad</label>
-                        <input type="text" name="quantity" onChange={handleChange}/>
-                    </div>
-                    <div className="form-row">
-                        <label>Marca</label>
-                        <input type="text" name="brand" onChange={handleChange}/>
-                    </div>  
-                </form>
-            </Modal>
+            <AddModal 
+                open={addModalOpen}
+                editMode={editMode}
+                onOk={addProduct}
+                onInputChange={handleChange}
+                onClose={()=>setAddModalOpen(false)}
+                product={selectedProduct}
+
+            />
+
             <Modal 
                 open={productDetailsOpen} 
-                onCancel={()=>{setProductDetailsOpen(false)}} 
+                onCancel={()=>{
+                    enableEditMode();
+                }} 
                 onOk={()=>{setProductDetailsOpen(false)}} 
                 onClose={()=>{setProductDetailsOpen(false)}}
+                cancelText="Editar"
             >
-                <h3>Detalles</h3>
-                {selectedProduct &&
-                    <span>{selectedProduct.name}</span> 
-                }
+                <h3>{selectedProduct?.name}</h3>
+                <h3>Descripción</h3>
+                <p>Aquí van los detalles del producto, como presentación, contenido de lactosa, etc</p>
+                <h3>Marca</h3>
+                <p>{selectedProduct?.brand}</p>
             </Modal>
         </div>
         

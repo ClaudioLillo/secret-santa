@@ -4,7 +4,7 @@ import "./Books.css";
 import Header from "../header/Header";
 import Book from "./Book";
 import { Space } from "antd";
-import Search, { SearchProps } from "antd/es/input/Search";
+import Search from "antd/es/input/Search";
 
 type BookItem = {
   name: string;
@@ -43,9 +43,7 @@ const books: BookItem[] = [
 
 export default function Books() {
   const [filter, setFilter] = useState<string>("");
-  const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
-    // console.log(info.source)
-    setFilter(value);
+  const onSearch = (value: string) => setFilter(value);
 
   const filterBooks = (books: BookItem[], input: string) => {
     const scores: [string, number][] = [];
@@ -53,8 +51,8 @@ export default function Books() {
     const nInput = input.toLowerCase();
     for (const book of books) {
       let score = 0;
-      let nName = book.name.toLowerCase();
-      let nAuthor = book.author?.toLowerCase();
+      const nName = book.name.toLowerCase();
+      const nAuthor = book.author?.toLowerCase();
       for (const c of nInput) {
         if (nName.indexOf(c) !== -1) {
           score += 1 / nInput.length;
