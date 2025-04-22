@@ -10,8 +10,7 @@ export default function Login() {
   const [users, setUsers] = useState<User[]>([]);
   const navigate = useNavigate();
 
-  const onSubmit = async (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    e.preventDefault();
+  const authenticate = async () => {
     await auth(user)
       .then((token) => {
         localStorage.setItem("token", token);
@@ -23,6 +22,11 @@ export default function Login() {
         console.log("Error de autenticación", err);
         alert("contraseña inválida, intente nuevamente");
       });
+  };
+
+  const onSubmit = async (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.preventDefault();
+    await authenticate();
   };
   const handleChange = (e: ChangeEvent<{ name: string; value: string }>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -42,10 +46,16 @@ export default function Login() {
       });
   }, []);
 
+  const handleKeyDown = async (e: React.KeyboardEvent<HTMLFormElement>) => {
+    if (e.key === "Enter") {
+      await authenticate();
+    }
+  };
+
   const isReady = users && users.length;
   return (
     <div className="login">
-      <Form>
+      <Form onKeyDown={handleKeyDown}>
         {isReady && (
           <Form.Item label="Seleccione su usuario de la lista">
             <Select

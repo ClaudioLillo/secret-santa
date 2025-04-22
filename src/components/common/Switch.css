@@ -8,6 +8,10 @@
     overflow: hidden;
 }
 
+.switch:hover{
+    cursor: pointer;
+}
+
 .switch-option-active{
     background-color: rgba(30,20,0,0.2);
     display: flex;

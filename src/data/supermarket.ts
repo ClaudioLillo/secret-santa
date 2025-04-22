@@ -26,7 +26,12 @@ export const getSupermarketItems = async () => {
     method: "GET",
   };
   const response = await axios(config);
-  return response.data.data.Items as SupermarketItem[];
+  return response.data.data.Items.map(
+    (item: { fields: SupermarketItem; name: string }) => ({
+      fields: item,
+      name: item.name,
+    })
+  ) as SupermarketItem[];
 };
 
 export const deleteSupermarketItem = async ({
@@ -47,12 +52,12 @@ export const deleteSupermarketItem = async ({
     headers: { "Content-Type": "application/json", authorization: token },
   };
   const response = await axios(config);
-  return response.data.data.Items as SupermarketItem[];
+  return response;
 };
 
 export const editSupermarketItem = async (supermarketItem: SupermarketItem) => {
   const token = localStorage.getItem("token");
-  const { sk, pk } = supermarketItem;
+  const { sk, pk } = supermarketItem.fields;
   if (!sk || !pk) {
     return new Error("sk or pk were not provided");
   }
@@ -60,7 +65,7 @@ export const editSupermarketItem = async (supermarketItem: SupermarketItem) => {
     url: SUPERMARKET_URL,
     method: "PUT",
     data: {
-      ...supermarketItem,
+      ...supermarketItem.fields,
     },
     headers: { "Content-Type": "application/json", authorization: token },
   };

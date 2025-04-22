@@ -1,0 +1,12 @@
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login > form {
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 16px;
+    width: 400px;
+
+}

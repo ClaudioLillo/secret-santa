@@ -1,10 +1,26 @@
+.supermarket {
+    max-width: 700px;
+    margin: auto;
+}
+
 .supermarket-input-container{
-    display: grid;
-    grid-auto-flow: column;
-    grid-column-gap: 10px;
+    display: flex;
     padding: 16px;
 }
 
+.supermarket-input-container div{
+    width: 50%;
+    margin-right: 15%;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.selector-container{
+    display:flex;
+    align-items: right;
+    justify-content:right;
+    padding-bottom: 4px;
+}
 .supermarket label{
     margin-right: 16px;
 }
@@ -66,4 +82,16 @@
     height: 24px;
     border: 1px solid rgba(0,0,0,0.1);
     border-radius: 5px;
+}
+
+.on {
+    color: blue;
+}
+
+.off {
+    color: grey;
+}
+
+button:hover{
+    cursor: pointer;
 }
