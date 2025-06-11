@@ -4,7 +4,8 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createHashRouter } from "react-router-dom";
 import store from "./redux/store";
 import { Provider } from "react-redux";
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // components
 import Login from "./components/login/Login";
@@ -18,24 +19,24 @@ import Plants from "./components/plants/Plants";
 
 let user: string | undefined = undefined;
 
-const token = localStorage.getItem('token');
+const token = localStorage.getItem("token");
 
-if (token === null || token === ""){
+if (token === null || token === "") {
   user = "";
 } else {
-  const decoded = jwtDecode<{exp: number, user: string}>(token);
+  const decoded = jwtDecode<{ exp: number; user: string }>(token);
   const now = new Date().getTime();
-  if ( decoded?.exp * 1000 > now){
+  if (decoded?.exp * 1000 > now) {
     user = decoded?.user;
   } else {
-    user = ""
+    user = "";
   }
 }
 
 const router = createHashRouter([
   {
     path: "/*",
-    element: <Home user={user}/>,
+    element: <Home user={user} />,
   },
   {
     path: "/tasks",
@@ -59,18 +60,25 @@ const router = createHashRouter([
   },
   {
     path: "/plants",
-    element: <Plants/>,
-  }
+    element: <Plants />,
+  },
 ]);
 
+const queryClient = new QueryClient();
+
 const rootElement = document.getElementById("root");
+
 if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <React.StrictMode>
-      {user !== undefined && <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>}
+      <QueryClientProvider client={queryClient}>
+        {user !== undefined && (
+          <Provider store={store}>
+            <RouterProvider router={router} />
+          </Provider>
+        )}
+      </QueryClientProvider>
     </React.StrictMode>
   );
 }

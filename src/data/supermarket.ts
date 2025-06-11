@@ -1,5 +1,6 @@
 import axios from "axios";
 import { SupermarketItem } from "../types/supermarket";
+import { useQuery } from "@tanstack/react-query";
 
 const SUPERMARKET_URL =
   "https://1mkmi7steb.execute-api.us-east-1.amazonaws.com/apiv1/supermarket";
@@ -12,12 +13,33 @@ export const createSupermarketItem = async (
     url: SUPERMARKET_URL,
     method: "POST",
     data: {
-      ...supermarketItem,
+      ...supermarketItem.fields,
+      description: supermarketItem.fields.description || "",
     },
     headers: { "Content-Type": "application/json", authorization: token },
   };
   const response = await axios(config);
   return response;
+};
+
+export const useGetSupermarketItem = () => {
+  const config = {
+    url: SUPERMARKET_URL,
+    method: "GET",
+  };
+  const getItems = async () => {
+    const res = await axios(config);
+    return res.data.data.Items.map(
+      (item: { fields: SupermarketItem; name: string }) => ({
+        fields: item,
+        name: item.name,
+      })
+    ) as SupermarketItem[];
+  };
+  return useQuery({
+    queryKey: ["supermarket-items"],
+    queryFn: () => getItems(),
+  });
 };
 
 export const getSupermarketItems = async () => {
@@ -56,19 +78,24 @@ export const deleteSupermarketItem = async ({
 };
 
 export const editSupermarketItem = async (supermarketItem: SupermarketItem) => {
-  const token = localStorage.getItem("token");
-  const { sk, pk } = supermarketItem.fields;
-  if (!sk || !pk) {
-    return new Error("sk or pk were not provided");
+  try {
+    const token = localStorage.getItem("token");
+    const { sk, pk } = supermarketItem.fields;
+    if (!sk || !pk) {
+      return new Error("sk or pk were not provided");
+    }
+    const config = {
+      url: SUPERMARKET_URL,
+      method: "PUT",
+      data: {
+        ...supermarketItem.fields,
+      },
+      headers: { "Content-Type": "application/json", authorization: token },
+    };
+    const response = await axios(config);
+    return response.data.data.Items as SupermarketItem[];
+  } catch (err) {
+    console.log(err);
+    return undefined;
   }
-  const config = {
-    url: SUPERMARKET_URL,
-    method: "PUT",
-    data: {
-      ...supermarketItem.fields,
-    },
-    headers: { "Content-Type": "application/json", authorization: token },
-  };
-  const response = await axios(config);
-  return response.data.data.Items as SupermarketItem[];
 };

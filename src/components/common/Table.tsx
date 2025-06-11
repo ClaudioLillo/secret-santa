@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./Table.css";
+
 type Column = {
   title: string;
   dataIndex: string;
@@ -49,9 +51,17 @@ export default function SupermarketTable<Item extends ItemType>({
       </div>
       <div className="table-body">
         {dataSource.map((row, index) => (
-          <div className="table-row" key={index} onClick={onRowClick(row.name)}>
+          <div className="table-row" key={index}>
             {columns.map((column) => (
-              <div className="table-body-cell" key={`${column.key}-${index}`}>
+              <div
+                className="table-body-cell"
+                key={`${column.key}-${index}`}
+                onClick={
+                  column.dataIndex === "element"
+                    ? undefined
+                    : onRowClick(row.name)
+                }
+              >
                 {column.dataIndex === "element"
                   ? row.element
                   : formatText(row.fields[column.dataIndex])}

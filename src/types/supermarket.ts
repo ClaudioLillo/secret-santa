@@ -6,6 +6,7 @@ export type SupermarketItem = {
     active: boolean;
     category?: string;
     imageUrl?: string;
+    description?: string;
     brand?: string;
     pk?: string;
     sk?: string;

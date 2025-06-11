@@ -1,0 +1,39 @@
+.table{
+    display: flex;
+    flex-direction: column;
+    font-family: Verdana, sans-serif;
+    font-size: 12px;
+    border-radius: 5px;
+    overflow: hidden;
+    color: rgba(0,0,0,0.8);
+}
+
+.table-header{
+    display: grid;
+    grid-template-columns: repeat(3, 33% [col-start]);
+    padding-bottom: 32px;
+}
+
+.table-header-cell{
+    padding: 5px;
+    grid-column: span 1;
+}
+
+.table-body{
+    display: flex;
+    flex-direction: column;
+}
+
+.table-row{
+    display: grid;
+    grid-template-columns: repeat(3, 33% [col-start]);
+    border: 1px solid #A3C3D9;
+    margin-bottom: 8px;
+    border-radius: 5px;
+}
+
+.table-body-cell{
+    grid-column: span 1;
+    padding: 8px;
+    min-height: 24px;
+}
