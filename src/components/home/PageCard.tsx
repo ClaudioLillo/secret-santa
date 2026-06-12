@@ -1,35 +1,35 @@
-import React, { useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import './Home.css';
+import "./Home.css";
 
 type Props = {
-    name: string;
-    icon: React.ReactNode;
-    path: string;
-    iconSelected?: React.ReactNode;
-}
+  name: string;
+  icon: React.ReactNode;
+  path: string;
+  iconSelected?: React.ReactNode;
+};
 
-export default function PageCard({name, icon, iconSelected, path}: Props){
-    const navigate = useNavigate();
-    const [selected, setSelected] = useState(false)
+export default function PageCard({ name, icon, iconSelected, path }: Props) {
+  const navigate = useNavigate();
+  const [selected, setSelected] = useState(false);
 
-    const goTo = (path: string) => () => {
-        navigate(`/${path}`);
-    };
+  const goTo = (path: string) => () => {
+    navigate(`/${path}`);
+  };
 
-    const handleSelected = (value: boolean) => () =>{
-        setSelected(value);
-    }
+  const handleSelected = (value: boolean) => () => {
+    setSelected(value);
+  };
 
-    return (
-        <div className="page-card" 
-            onClick={goTo(path)} 
-            onMouseOver={handleSelected(true)} 
-            onMouseOut={handleSelected(false)}
-        >
-            {selected ? iconSelected: icon}
-            <div>{name}</div>
-        </div>
-    )
+  return (
+    <div
+      className="page-card"
+      onClick={goTo(path)}
+      onMouseOver={handleSelected(true)}
+      onMouseOut={handleSelected(false)}
+    >
+      <div>{name}</div>
+    </div>
+  );
 }

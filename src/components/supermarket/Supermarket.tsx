@@ -136,11 +136,24 @@ export default function Supermarket() {
     const categories: string[] = [];
     for (const item of items) {
       const { category } = item.fields;
-      if (category && !categories.includes(category)) {
-        categories.push(category);
+      if (category && !categories.includes(category.toLowerCase())) {
+        categories.push(category.toLowerCase());
       }
     }
     return categories;
+  };
+
+  const filterByCategory = (items: SupermarketItem[]) => {
+    if (selectedCategories.length === 0) {
+      return items;
+    }
+    return items.filter((item) => {
+      const category = item.fields.category;
+      if (category && selectedCategories.includes(category.toLowerCase())) {
+        return true;
+      }
+      return false;
+    });
   };
 
   const handleSelectedCategories = (category: string) => () => {
@@ -177,15 +190,13 @@ export default function Supermarket() {
       </div>
       {items && items.length > 0 && dataSource && (
         <Table
-          dataSource={dataSource}
+          dataSource={filterByCategory(dataSource)}
           columns={Columns}
           onRowClick={onRowClick}
           displayStatus={!onlyActive}
         />
       )}
-      <div className="table-info">
-        <span>{`productos: ${dataSource?.length}`}</span>
-      </div>
+
       <div>
         {dataSource &&
           getCategories(dataSource).map((item) =>
@@ -200,6 +211,10 @@ export default function Supermarket() {
               </span>
             ) : null
           )}
+      </div>
+
+      <div className="table-info">
+        <span>{`productos: ${dataSource?.length}`}</span>
       </div>
       <AddModal
         open={addModalOpen}
