@@ -1,5 +1,5 @@
 import { Button, Modal } from "antd";
-import React, { useState } from "react";
+import React from "react";
 import { SupermarketItem } from "../../types/supermarket";
 
 type Props = {

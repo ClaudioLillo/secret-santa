@@ -4,6 +4,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+    position: fixed;
+    z-index: 3;
 }
 
 .page-card{
@@ -36,6 +38,8 @@
 
 .toggle-menu-collapsed {
     display: none;
+    animation-name: slideIn;
+    animation-duration: 10s;
 }
 
 @media screen and (max-width: 768px) {
@@ -43,6 +47,8 @@
         background-color: rgba(0,0,0,0.8);
         flex-direction: column;
         width: 75%;
+        animation-name: slideIn;
+        border-radius: 0 3px 3px 0;
     }
 
     .home.collapsed {
@@ -53,8 +59,20 @@
         display: block;
         padding: 4px;
         border: 1px solid black;
-        width: 20px;
-        margin-bottom: 4px;
+        width: 24px;
+        margin: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 3px;
+        background-color: rgba(0,0,0,0.8);
+        color: white;
+        animation-name: slideIn;
+        animation-duration: 10s;
+    }
+
+    .toggle-menu-collapsed:hover {
+        cursor: pointer;
     }
 
     .page-card {
@@ -64,4 +82,13 @@
         justify-content: left;
         color: white;
     }
+}
+
+ @keyframes slideIn {
+    from {background-color: red;}
+    to {background-color: blue;}
+}
+
+@keyframes slideOut {
+
 }

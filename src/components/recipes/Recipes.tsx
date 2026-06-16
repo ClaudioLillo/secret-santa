@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import "./Recipes.css";
 
 import RecipeItem from "./Recipe";
-import Header from "../header/Header";
 import { Button, Divider, Form, Input, Modal } from "antd";
 import { createRecipe, getRecipes } from "../../data/recipes";
 import { Recipe, Ingredient } from "../../types/recipes";
@@ -101,8 +100,6 @@ export default function Recipes() {
 
   return (
     <div>
-      <Header />
-      <Divider />
       <Button onClick={handleOpen} className="new-recipe-button">
         Nueva
       </Button>

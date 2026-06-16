@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import ReactDOM from "react-dom/client";
 
 import { RouterProvider, createHashRouter } from "react-router-dom";
@@ -7,13 +7,14 @@ import { Provider } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+import './index.css';
 // components
 import Login from "./components/login/Login";
 // import Devices from "./components/devices/Devices";
 import Tasks from "./components/tasks/Tasks";
 import Books from "./components/books/Books";
 import Recipes from "./components/recipes/Recipes";
-import Home from "./components/home/Home";
+import Navigator from "./components/navigator/Navigator";
 import Supermarket from "./components/supermarket/Supermarket";
 import Plants from "./components/plants/Plants";
 
@@ -33,26 +34,35 @@ if (token === null || token === "") {
   }
 }
 
+const withNavigator = (component?: ReactNode) => {
+  return (
+    <div className="app">
+      <Navigator user={user}/>
+      {component && component}
+    </div>
+  )
+}
+
 const router = createHashRouter([
   {
     path: "/*",
-    element: <Home user={user} />,
+    element: withNavigator(),
   },
   {
     path: "/tasks",
-    element: <Tasks />,
+    element: withNavigator(<Tasks/>),
   },
   {
     path: "/books",
-    element: <Books />,
+    element: withNavigator(<Books />),
   },
   {
     path: "/recipes",
-    element: <Recipes />,
+    element: withNavigator(<Recipes />),
   },
   {
     path: "/supermarket",
-    element: <Supermarket />,
+    element: withNavigator(<Supermarket />),
   },
   {
     path: "/login",

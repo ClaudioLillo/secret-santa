@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./Home.css";
-import PageCard from "./PageCard";
+import "./Navigator.css";
+import PageCard from "./NavItem";
 
 import Plant from "../../icons/Plants";
 import Supermarket from "../../icons/supermarket";
@@ -9,6 +9,7 @@ import Books from "../../icons/Books";
 import Tasks from "../../icons/Tasks";
 import Recipes from "../../icons/Recipes";
 import Devices from "../../icons/Devices";
+import Options from "../../icons/Options";
 import { Navigate } from "react-router-dom";
 
 export type Page = {
@@ -49,20 +50,20 @@ export default function HomePage({ user }: Props) {
     },
   ];
 
-  const handleCollpased = () => {
+  const handleCollapsed = () => {
     setCollapsed(!collapsed);
   };
 
   return (
     <>
-      <div className="toggle-menu-collapsed" onClick={handleCollpased}>
-        | | |
+      <div className="toggle-menu-collapsed" onClick={handleCollapsed}>
+        <Options color="white"/>
       </div>
       <div className={`home ${collapsed ? "collapsed" : ""}`}>
         {!user && <Navigate to="/login" />}
         {!collapsed &&
           pages.map((page, index) => (
-            <PageCard {...page} key={`page-${index}`} />
+            <PageCard {...page} key={`page-${index}`} onClose={handleCollapsed}/>
           ))}
       </div>
     </>
