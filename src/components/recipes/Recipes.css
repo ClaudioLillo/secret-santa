@@ -1,3 +1,7 @@
+.recipes {
+  padding: 8px;
+}
+
 .recipe-title {
   color: red;
 }
@@ -13,6 +17,7 @@
   font-family: Verdana, sans-serif;
   margin: 0;
   padding: 10px;
+  font-size: 14px;
 }
 
 .recipe-item:hover {

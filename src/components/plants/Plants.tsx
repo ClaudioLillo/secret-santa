@@ -1,14 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Plant from "./Plant";
-import Header from "../header/Header";
-import { Divider, Modal } from "antd";
+import { Modal } from "antd";
 
-// type Plant = {
-//     commonName: string;
-//     scientificName: string;
-//     image?: string;
-//     description?: string;
-// }
 
 const plants = [
   {
@@ -67,9 +60,7 @@ export default function Plants() {
     setOpen(true);
   };
   return (
-    <div>
-      <Header />
-      <Divider />
+    <div className="plants">
       {plants.map((plant, index) => {
         return <Plant {...plant} key={index} onClick={handleModalOpen} />;
       })}

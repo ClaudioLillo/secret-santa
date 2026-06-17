@@ -25,6 +25,6 @@ export const auth = async ({ sk, password }: User) => {
     localStorage.setItem("token", token);
     return token;
   } catch (e) {
-    return e;
+    throw e;
   }
 };

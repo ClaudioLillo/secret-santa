@@ -1,13 +1,11 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import { auth, User } from "../../data/login";
-import { getUsers } from "../../data/users";
-import { Button, Form, Input, Select } from "antd";
+import { Button, Form, Input } from "antd";
 
 export default function Login() {
   const [user, setUser] = useState<User>({});
-  const [users, setUsers] = useState<User[]>([]);
   const navigate = useNavigate();
 
   const authenticate = async () => {
@@ -32,41 +30,20 @@ export default function Login() {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleSelectChange = (e: string) => {
-    setUser({ ...user, sk: e });
-  };
-
-  useEffect(() => {
-    getUsers()
-      .then((users) => {
-        setUsers(users);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLFormElement>) => {
     if (e.key === "Enter") {
       await authenticate();
     }
   };
 
-  const isReady = users && users.length;
   return (
     <div className="login">
       <Form onKeyDown={handleKeyDown}>
-        {isReady && (
-          <Form.Item label="Seleccione su usuario de la lista">
-            <Select
-              onChange={handleSelectChange}
-              options={users.map((user) => ({
-                value: user.sk,
-                label: user.fullName,
-              }))}
-            />
+        
+          <Form.Item label="Usuario">
+            <Input onChange={handleChange} name="sk" type="text" />
           </Form.Item>
-        )}
+        
         <Form.Item label="Contraseña">
           <Input onChange={handleChange} name="password" type="password" />
         </Form.Item>

@@ -70,7 +70,7 @@ const router = createHashRouter([
   },
   {
     path: "/plants",
-    element: <Plants />,
+    element: withNavigator(<Plants />),
   },
 ]);
 

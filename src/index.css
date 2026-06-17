@@ -33,8 +33,13 @@ html, body, #root {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  scrollbar-width: none;
 }
 
 .footer {
   font-size: 8px;
+}
+
+body::-webkit-scrollbar {
+    display: none;                  /* Chrome, Safari, and Opera */
 }

@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import "./Recipes.css";
 
 import RecipeItem from "./Recipe";
-import { Button, Divider, Form, Input, Modal } from "antd";
+import { Divider, Form, Input, Modal } from "antd";
 import { createRecipe, getRecipes } from "../../data/recipes";
 import { Recipe, Ingredient } from "../../types/recipes";
+import Button from "../common/Button";
 
 export default function Recipes() {
   const [open, setOpen] = useState(false);
@@ -99,9 +100,9 @@ export default function Recipes() {
   }, []);
 
   return (
-    <div>
-      <Button onClick={handleOpen} className="new-recipe-button">
-        Nueva
+    <div className="recipes">
+      <Button onClick={handleOpen} text="Nueva">
+      
       </Button>
       <Modal
         open={open}

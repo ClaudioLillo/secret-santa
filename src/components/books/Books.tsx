@@ -1,45 +1,11 @@
 import React, { useState } from "react";
 
 import "./Books.css";
-import Header from "../header/Header";
 import Book from "./Book";
 import { Space } from "antd";
 import Search from "antd/es/input/Search";
-
-type BookItem = {
-  name: string;
-  pages?: number;
-  year?: number;
-  author?: string;
-  editorial?: string;
-  edition?: number;
-  isbn?: string;
-};
-
-const books: BookItem[] = [
-  {
-    name: "Getting Started with Kubernetes",
-    author: "Jonathan Baier",
-    year: 2015,
-    editorial: "Packt",
-    isbn: "978-1-78439-403-5",
-  },
-  {
-    name: "Learning JavaScript Design Patterns",
-    author: "Addy Osmani",
-    year: 2012,
-    editorial: "O'Reilly",
-    isbn: "9781449331818",
-  },
-  {
-    name: "Go Programming",
-    author: "John Baugh",
-    year: 2010,
-    isbn: "1453636676",
-  },
-  { name: "Element 3", author: "author 3" },
-  { name: "Element 4", author: "author 4" },
-];
+import {books} from "../../data/books";
+import type { BookItem } from "../../types/books";
 
 export default function Books() {
   const [filter, setFilter] = useState<string>("");
@@ -72,13 +38,8 @@ export default function Books() {
     return sorted.map((item) => booksMap[item[0]]);
   };
 
-  //   if (filter) {
-  //     filterBooks(books, filter);
-  //   }
-
   return (
     <div>
-      <Header />
       <div className="books-filters">
         <Space direction="vertical">
           <Search
