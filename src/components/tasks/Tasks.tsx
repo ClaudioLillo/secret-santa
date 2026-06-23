@@ -1,9 +1,10 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 
 import "./Tasks.css";
 import Header from "../header/Header";
 import Task from "./Task";
 import { Select } from "antd";
+import Button from "../common/Button";
 
 enum Status {
   Active = "active",
@@ -47,20 +48,40 @@ const elements: TaskItem[] = [
   },
 ];
 
-const options = [
-  { value: "casa", label: "casa" },
-  { value: "supermercado", label: "supermercado" },
-  { value: "feria", label: "feria" },
+const columns = [
+  { key: "open", label: "Abierta" },
+  { key: "in-progress", label: "En progreso" },
+  { key: "completed", label: "Finalizada" },
+  { key: "closed", label: "Cerrada"}
 ];
 
 export default function List() {
+  const [column, setColumn] = useState(columns[0]);
+  
+  const handleChange = (e: string) => {
+    console.log(e);
+  }
+
+  const handleCreate = () => {
+    console.log('create');
+  }
   return (
     <div>
-      <Header />
-      <div className="tasks-menu">
-        <Select options={options} defaultValue="supermercado" />
+      <div className="tasks-header">
+        <Select
+          style={{minWidth:150}}
+          onChange={handleChange}
+          defaultValue="gato"
+          options={columns.map(({key, label})=>({
+            value: key,
+            label
+          }))}
+          
+        />
+        <Button onClick={handleCreate}>Crear</Button>
       </div>
-      <div className="tasks">
+      
+      <div className="task-list">
         {elements.map((task: TaskItem, index: number) => (
           <Task task={task} key={index} />
         ))}

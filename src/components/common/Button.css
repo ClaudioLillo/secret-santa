@@ -5,6 +5,9 @@
     width: fit-content;
     padding: 4px;
     color: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .button:hover {

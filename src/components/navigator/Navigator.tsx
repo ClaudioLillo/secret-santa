@@ -34,7 +34,7 @@ export default function HomePage({ user }: Props) {
       path: "devices",
       iconSelected: <Devices color="purple" />,
     },
-    { name: "Tareas", icon: <Tasks color={color} />, path: "taks" },
+    { name: "Tareas", icon: <Tasks color={color} />, path: "tasks" },
     { name: "Libros", icon: <Books color={color} />, path: "books" },
     { name: "Recetas", icon: <Recipes color={color} />, path: "recipes" },
     { name: "Plantas", icon: <Plant color={color} />, path: "plants" },
