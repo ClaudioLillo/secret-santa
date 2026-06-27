@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import "./Navigator.css";
 import PageCard from "./NavItem";
 
+// hooks
+import useDeviceWidth from "../../hooks/useDeviceWidth"
+
+// components
 import Plant from "../../icons/Plants";
 import Supermarket from "../../icons/supermarket";
 import Settings from "../../icons/Settings";
@@ -27,6 +31,7 @@ const color = "#993955";
 
 export default function HomePage({ user }: Props) {
   const [collapsed, setCollapsed] = useState(false);
+  const deviceWidth = useDeviceWidth();
   const pages: Page[] = [
     {
       name: "Dispositivos",
@@ -51,6 +56,9 @@ export default function HomePage({ user }: Props) {
   ];
 
   const handleCollapsed = () => {
+    if (deviceWidth > 768) {
+      return;
+    }
     setCollapsed(!collapsed);
   };
 
